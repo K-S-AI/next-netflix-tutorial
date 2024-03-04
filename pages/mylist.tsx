@@ -28,7 +28,6 @@ export async function getServerSideProps(context: NextPageContext) {
 }
 
 const Mylist = () => {
-  const { data: movies = [] } = useMovieList();
   const { data: favorites = [] } = useFavorites();
   const {isOpen, closeModal} = useInfoModalStore();
 
