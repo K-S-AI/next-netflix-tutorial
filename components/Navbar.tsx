@@ -37,16 +37,30 @@ const Navbar = () => {
     setShowMobileMenu((current) => !current);
   }, []);
 
+  // 增加功能
+  const [homeactiveItem, sethomeActiveItem] = useState<boolean>(true);
+  const [mylistactiveItem, setmylistActiveItem] = useState<boolean>(false);
+
+  const homehandleItemClick = () => {
+    sethomeActiveItem(true);
+    setmylistActiveItem(false);
+  };
+  const mylisthandleItemClick = () => {
+    sethomeActiveItem(false);
+    setmylistActiveItem(true);
+  };
+  // end
+
   return (
     <nav className="w-full fixed z-40">
       <div className={`px-4 md:px-16 py-6 flex flex-row items-center transition duration-500 ${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''}`}>
         <img src="/images/logo.png" className="h-4 lg:h-7" alt="Logo" />
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
-          <NavbarItem label="Home" active />
+          <NavbarItem label='Home' active={homeactiveItem} onClick={() => homehandleItemClick()}/> 
           <NavbarItem label="Series" />
           <NavbarItem label="Films" />
           <NavbarItem label="New & Popular" />
-          <NavbarItem label="My List" />
+          <NavbarItem label="My List" active={mylistactiveItem} onClick={() => mylisthandleItemClick()}/>
           <NavbarItem label="Browse by Languages" />
         </div>
         <div onClick={toggleMobileMenu} className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative">

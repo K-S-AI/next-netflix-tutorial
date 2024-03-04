@@ -60,3 +60,6 @@ Running commands with npm `npm run [command]`
 | command         | description                              |
 | :-------------- | :--------------------------------------- |
 | `dev`           | Starts a development instance of the app |
+
+#### 后续需要完善各个components，google登陆，还有各个视频的下载控制。
+#### 后续需要了解其他法律风险
