@@ -16,7 +16,10 @@ const NavbarItem: React.FC<NavbarItemProps> = ({ label, active,onClick}) => {
   const handleNavigation = () => {
     if (label === 'Home') {
       router.push('/');
-    } else if (label === 'My List') {
+    } else if (label === 'Films') {
+      router.push('/films');
+    }
+    else if (label === 'My List') {
       router.push('/mylist');
     }
   };

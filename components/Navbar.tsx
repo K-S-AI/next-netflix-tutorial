@@ -4,6 +4,7 @@ import { BellIcon, MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react
 import AccountMenu from '@/components/AccountMenu';
 import MobileMenu from '@/components/MobileMenu';
 import NavbarItem from '@/components/NavbarItem';
+import SearchBar from '@/components/SearchBar';
 
 const TOP_OFFSET = 66;
 
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,17 +38,29 @@ const Navbar = () => {
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((current) => !current);
   }, []);
+//  修改搜索栏
+  const toggleSearchBar = useCallback(() => {
+    setShowSearch((current) => !current);
+  }, []);
 
   // 增加功能
   const [homeactiveItem, sethomeActiveItem] = useState<boolean>(true);
+  const [filmsactiveItem, setfilmsActiveItem] = useState<boolean>(false);
   const [mylistactiveItem, setmylistActiveItem] = useState<boolean>(false);
 
   const homehandleItemClick = () => {
     sethomeActiveItem(true);
+    setfilmsActiveItem(false);
+    setmylistActiveItem(false);
+  };
+  const filmshandleItemClick = () => {
+    sethomeActiveItem(false);
+    setfilmsActiveItem(true);
     setmylistActiveItem(false);
   };
   const mylisthandleItemClick = () => {
     sethomeActiveItem(false);
+    setfilmsActiveItem(false);
     setmylistActiveItem(true);
   };
   // end
@@ -58,7 +72,7 @@ const Navbar = () => {
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
           <NavbarItem label='Home' active={homeactiveItem} onClick={() => homehandleItemClick()}/> 
           <NavbarItem label="Series" />
-          <NavbarItem label="Films" />
+          <NavbarItem label="Films" active={filmsactiveItem} onClick={()=> filmshandleItemClick} />
           <NavbarItem label="New & Popular" />
           <NavbarItem label="My List" active={mylistactiveItem} onClick={() => mylisthandleItemClick()}/>
           <NavbarItem label="Browse by Languages" />
@@ -69,8 +83,12 @@ const Navbar = () => {
           <MobileMenu visible={showMobileMenu} />
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center">
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <MagnifyingGlassIcon className="w-6" />
+          {/* 修改搜索栏 */}
+          <div onClick={toggleSearchBar} className="flex flex-row items-center gap-2 cursor-pointer relative">
+            <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+              <MagnifyingGlassIcon className="w-6" />
+              <SearchBar visible={showSearch} />
+            </div>
           </div>
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BellIcon className="w-6" />
